@@ -72,6 +72,27 @@ proxypool    | 2020-02-19 17:09:46,596 INFO success: tester entered RUNNING stat
 + RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
 ```
 
+此处，如果也可以先运行`docker-compose build`命令，再运行`docker-compose up`命令。
+这两个命令和上面的命令在运行时，会先拉取python3.6 docker镜像，然后在此基础上创建新的docker镜像，
+如果在拉取python3.6 镜像比较慢时，可以设置`daemon.json`，具体内容如下：
+```angularjs
+{
+  "registry-mirrors": [
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn"
+  ],
+  "insecure-registries": [],
+  "debug": false,
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  }
+}
+```
+windows的daemon.json路径在`C:\Users\xxx\.docker\`下面
+
+
 ## 常规方式运行
 
 如果不使用 Docker 运行，配置好 Python、Redis 环境之后也可运行，步骤如下。
